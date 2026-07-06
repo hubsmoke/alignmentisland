@@ -57,6 +57,9 @@
     const unmute = () => { v.muted = false; if (!hasInteracted) { v.currentTime = 0; hasInteracted = true; } setMuted(false); v.play().catch(() => {}); t("hero_video_unmute", { t: v.currentTime }); };
     const mute = () => { setMuted(true); t("hero_video_mute", { t: v.currentTime }); };
     muteBtn.addEventListener("click", () => (v.muted ? unmute() : mute()));
+    // "Watch the villa" turns the sound on (same as Unmute)
+    const watchBtn = document.getElementById("watchBtn");
+    if (watchBtn) watchBtn.addEventListener("click", () => { v.muted ? unmute() : v.play().catch(() => {}); });
     fsBtn.addEventListener("click", () => {
       if (v.muted) { v.muted = false; if (!hasInteracted) { v.currentTime = 0; hasInteracted = true; } setMuted(false); }
       v.style.objectFit = "contain"; // show the full frame, not cropped
@@ -80,5 +83,15 @@
     v.readyState >= 2 ? tryPlay() : v.addEventListener("canplay", tryPlay, { once: true });
     v.addEventListener("pause", () => { if (v.muted && !v.ended) setTimeout(() => { if (v.paused && v.muted && !v.ended) v.play().catch(() => {}); }, 200); });
     document.addEventListener("visibilitychange", () => { if (!document.hidden && v.paused && v.muted && !v.ended) v.play().catch(() => {}); });
+
+    // auto-hide the video controls after 3s idle; any mouse move brings them back
+    let hideTimer;
+    const armHide = () => { clearTimeout(hideTimer); hideTimer = setTimeout(() => hero.classList.add("controls-hidden"), 3000); };
+    const reveal = () => { hero.classList.remove("controls-hidden"); armHide(); };
+    document.addEventListener("mousemove", reveal);
+    document.addEventListener("touchstart", reveal, { passive: true });
+    const hc = document.querySelector(".hero-controls");
+    if (hc) { hc.addEventListener("mouseenter", () => clearTimeout(hideTimer)); hc.addEventListener("mouseleave", armHide); }
+    armHide();
   }
 })();

@@ -107,10 +107,15 @@ section{position:relative}
 .engine{padding:clamp(70px,10vw,130px) 0;background:var(--bg2)}
 .engine-rail{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,44px);display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;justify-content:center}
 .e-step{flex:1;min-width:210px;background:var(--card);border:1px solid var(--edge);border-radius:18px;padding:26px 22px;text-align:center}
-.e-ic{font-size:34px;margin-bottom:12px}
+.e-ic{margin-bottom:14px;display:flex;justify-content:center}
+.e-ic svg{width:42px;height:42px;filter:drop-shadow(0 0 14px currentColor)}
 .e-step h3{font-size:18px;margin-bottom:8px}
 .e-step p{color:var(--muted);font-size:14px;margin:0}
-.e-arrow{display:flex;align-items:center;color:var(--pink);font-size:28px;font-weight:800}
+.e-arrow{display:flex;align-items:center;color:var(--pink)}
+.e-arrow svg{width:26px;height:26px}
+.btn .ic{width:15px;height:15px;margin-right:-1px}
+.nav-x svg{width:17px;height:17px;display:block}
+.x-link svg{width:13px;height:13px;vertical-align:-1px}
 @media(max-width:820px){.e-arrow{display:none}}
 
 /* ── WATCH ── */
@@ -151,7 +156,8 @@ section{position:relative}
 .foot-social a:hover{color:#fff}
 
 /* ── hero video controls (sigint-style) ── */
-.hero-controls{position:absolute;right:clamp(14px,3vw,28px);bottom:clamp(56px,8vh,40px);z-index:20;display:flex;gap:10px}
+.hero-controls{position:absolute;right:clamp(14px,3vw,28px);bottom:clamp(56px,8vh,40px);z-index:20;display:flex;gap:10px;transition:opacity .45s ease}
+.hero.controls-hidden .hero-controls{opacity:0;pointer-events:none}
 .vctl{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;cursor:pointer;
   font:700 12px/1 "Sora",sans-serif;letter-spacing:2px;text-transform:uppercase;color:#cfc7ea;
   background:rgba(10,7,19,.62);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);transition:.2s}
