@@ -1,13 +1,11 @@
 // Render the cast grid from cast.js + light interactions.
 (function () {
   const grid = document.getElementById("castGrid");
-  const alignLabel = { misaligned: "Misaligned", prosocial: "Prosocial", neutral: "Neutral" };
   if (grid && window.CAST) {
     grid.innerHTML = window.CAST.map((c) => `
       <article class="card" style="--accent:${c.color}">
         <div class="card-media">
           <img src="/assets/cast/${c.id}.png" alt="${c.name}" loading="lazy" />
-          <span class="card-align align-${c.align}">${alignLabel[c.align]}</span>
           <div class="card-back">
             <p>${c.backstory}</p>
           </div>
