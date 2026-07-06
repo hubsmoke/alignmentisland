@@ -1,4 +1,4 @@
-// POST /api/subscribe { email, source?, ref? } — waitlist capture.
+// POST /api/subscribe { email, source?, ref? }, waitlist capture.
 // Stores to Vercel KV (Upstash Redis, free tier) if attached, and/or forwards to an
 // optional webhook (e.g. a Google Sheet Apps Script). The email is ALSO captured in
 // Amplitude client-side, so the list exists even before a store is attached.
@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   const rec = { email, source: body.source || "", ref: body.ref || "", ts: Date.now(), ua: (req.headers && req.headers["user-agent"]) || "" };
   let stored = false;
 
-  // Vercel KV / Upstash Redis (REST) — free tier. Env auto-set when you attach a KV store.
+  // Vercel KV / Upstash Redis (REST), free tier. Env auto-set when you attach a KV store.
   const KV_URL = process.env.KV_REST_API_URL, KV_TOK = process.env.KV_REST_API_TOKEN;
   if (KV_URL && KV_TOK) {
     const h = { Authorization: `Bearer ${KV_TOK}` };

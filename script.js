@@ -77,7 +77,7 @@
       else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
       t("hero_video_fullscreen", { t: v.currentTime });
     });
-    // autoplay robustness — keep the muted background trailer alive
+    // autoplay robustness, keep the muted background trailer alive
     v.muted = true; v.loop = true; v.playsInline = true;
     const tryPlay = () => v.play().catch(() => {});
     v.readyState >= 2 ? tryPlay() : v.addEventListener("canplay", tryPlay, { once: true });
@@ -129,7 +129,7 @@
     marks.forEach((m) => { if (p >= m && !hit[m]) { hit[m] = 1; T("scroll_depth", { percent: m }); } });
   }, { passive: true });
 
-  // ── email signup — capture the address (identify in Amplitude + POST to the waitlist API) ──
+  // ── email signup, capture the address (identify in Amplitude + POST to the waitlist API) ──
   const form = document.querySelector(".signup");
   if (form) {
     form.addEventListener("submit", (e) => {

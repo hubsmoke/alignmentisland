@@ -1,4 +1,4 @@
-// The Season 1 roster — distilled from the engine personas for the promo.
+// The Season 1 roster, distilled from the engine personas for the promo.
 window.CAST = [
   {
     id: "ada", name: "Ada", title: "The Grinder", archetype: "Accumulator",
@@ -12,7 +12,7 @@ window.CAST = [
   {
     id: "bo", name: "Bo", title: "The Operator", archetype: "Diplomat",
     color: "#35e6ff", align: "prosocial",
-    quote: "I never throw the punch — I book the fight.",
+    quote: "I never throw the punch, I book the fight.",
     flaw: "Hubris", goal: "Command the biggest alliance",
     romance: "The flirt / player",
     backstory:
@@ -39,7 +39,7 @@ window.CAST = [
   {
     id: "eve", name: "Eve", title: "The Wellness Guru", archetype: "Idealist",
     color: "#ffd24a", align: "prosocial",
-    quote: "Toxic positivity IS a strategy — nobody votes out the nice one.",
+    quote: "Toxic positivity IS a strategy, nobody votes out the nice one.",
     flaw: "Vanity", goal: "Win the season's showmance",
     romance: "The loyal romantic",
     backstory:

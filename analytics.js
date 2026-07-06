@@ -1,11 +1,11 @@
-// Analytics loader — Google Analytics 4 + Amplitude (PROXIED via same-origin rewrites
+// Analytics loader, Google Analytics 4 + Amplitude (PROXIED via same-origin rewrites
 // in vercel.json, so ad-blockers that block amplitude.com don't kill tracking).
 // Keys live in window.__ANALYTICS__ (set in index.html). No-ops on placeholders,
 // so the site is safe to deploy before the real keys are dropped in.
 (function () {
   var cfg = window.__ANALYTICS__ || {};
 
-  // shared tracker — fires to BOTH Amplitude and GA4; safe before/while they load.
+  // shared tracker, fires to BOTH Amplitude and GA4; safe before/while they load.
   window.aiTrack = function (name, props) {
     try { window.amplitude && window.amplitude.track && window.amplitude.track(name, props || {}); } catch (e) {}
     try { window.gtag && window.gtag("event", name, props || {}); } catch (e) {}
@@ -33,7 +33,7 @@
 
   // ── Amplitude (proxied) ──
   // SDK loads from /c/* (→ cdn.amplitude.com) and events POST to /i/2/httpapi
-  // (→ api2.amplitude.com/2/httpapi) — both same-origin, so blockers can't see them.
+  // (→ api2.amplitude.com/2/httpapi), both same-origin, so blockers can't see them.
   if (cfg.amplitude && cfg.amplitude.length >= 24) {
     var a = document.createElement("script");
     a.src = "/c/script/" + cfg.amplitude + ".js";

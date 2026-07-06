@@ -1,4 +1,4 @@
-// GET /api/list?token=… (or Authorization: Bearer …) — pull the waitlist as JSON.
+// GET /api/list?token=… (or Authorization: Bearer …), pull the waitlist as JSON.
 // Token-gated by LIST_TOKEN env. Reads the deduped `waitlist` set from Vercel KV.
 module.exports = async (req, res) => {
   const token = process.env.LIST_TOKEN;
