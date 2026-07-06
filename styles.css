@@ -133,3 +133,17 @@ section{position:relative}
 .reveal{opacity:0;transform:translateY(22px);transition:.7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}*{scroll-behavior:auto}}
+
+/* ── official logo lockups ── */
+.brand{gap:0}
+.nav-logo{height:28px;width:auto;display:block;filter:drop-shadow(0 2px 10px rgba(0,0,0,.6))}
+.nav.scrolled .nav-logo{height:24px}
+.nav-x{font-size:19px;color:var(--muted)!important}
+.nav-x:hover{color:#fff!important}
+.hero-logo{width:min(600px,86vw);height:auto;margin:8px 0 2px;filter:drop-shadow(0 10px 44px rgba(255,45,120,.35))}
+.hero-kicker{color:var(--muted);font-size:clamp(11px,1.4vw,14px);letter-spacing:1.5px;text-transform:uppercase;margin:10px 0 0}
+.hero-kicker b{color:var(--cyan)}
+.foot-logo{height:36px;width:auto;margin-bottom:4px}
+.foot-social{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:14px;margin-top:6px;flex-wrap:wrap;justify-content:center}
+.foot-social a{color:var(--cyan);font-weight:600}
+.foot-social a:hover{color:#fff}
