@@ -5,6 +5,20 @@
 (function () {
   var cfg = window.__ANALYTICS__ || {};
 
+  // shared tracker — fires to BOTH Amplitude and GA4; safe before/while they load.
+  window.aiTrack = function (name, props) {
+    try { window.amplitude && window.amplitude.track && window.amplitude.track(name, props || {}); } catch (e) {}
+    try { window.gtag && window.gtag("event", name, props || {}); } catch (e) {}
+  };
+  window.aiIdentify = function (email) {
+    try {
+      if (window.amplitude) {
+        window.amplitude.setUserId && window.amplitude.setUserId(email);
+        if (window.amplitude.Identify) { var id = new window.amplitude.Identify().set("email", email); window.amplitude.identify(id); }
+      }
+    } catch (e) {}
+  };
+
   // ── Google Analytics 4 ──
   if (cfg.ga && cfg.ga.indexOf("G-") === 0) {
     var g = document.createElement("script");

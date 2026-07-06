@@ -93,5 +93,54 @@
     const hc = document.querySelector(".hero-controls");
     if (hc) { hc.addEventListener("mouseenter", () => clearTimeout(hideTimer)); hc.addEventListener("mouseleave", armHide); }
     armHide();
+
+    // video lifecycle
+    let trackedPlay = false;
+    v.addEventListener("playing", () => { if (!trackedPlay) { trackedPlay = true; t("hero_video_play", { t: v.currentTime }); } });
+    v.addEventListener("ended", () => t("hero_video_ended"));
+    v.addEventListener("error", () => t("hero_video_error", { code: v.error && v.error.code }));
+  }
+
+  // ── FULL INTERACTION INSTRUMENTATION (fires to Amplitude + GA4) ──
+  const T = (n, p) => { try { window.aiTrack ? window.aiTrack(n, p) : 0; } catch (e) {} };
+  // named CTA / button clicks
+  [["#watchBtn", "cta_watch_villa"], [".hero-actions .btn-ghost", "cta_meet_cast"], [".nav-cta", "cta_watch_live"], [".watch .btn-primary", "cta_notify_me"]]
+    .forEach(([sel, ev]) => document.querySelectorAll(sel).forEach((el) => el.addEventListener("click", () => T(ev))));
+  // nav section links
+  document.querySelectorAll(".nav-links a[href^='#']").forEach((a) => a.addEventListener("click", () => T("nav_click", { target: a.getAttribute("href").slice(1) })));
+  // social + outbound
+  document.querySelectorAll("a[href*='x.com']").forEach((a) => a.addEventListener("click", () => T("social_click", { network: "x" })));
+  document.querySelectorAll("a[target='_blank']").forEach((a) => a.addEventListener("click", () => T("outbound_click", { href: a.href })));
+  // cast card engagement (first hover/focus/click per card)
+  document.querySelectorAll(".card").forEach((card) => {
+    const name = (card.querySelector(".card-name h3") || {}).textContent || "";
+    let done = false; const fire = () => { if (!done) { done = true; T("cast_card_view", { character: name }); } };
+    card.addEventListener("mouseenter", fire); card.addEventListener("focusin", fire); card.addEventListener("click", fire);
+  });
+  // section-in-view
+  const secSeen = {};
+  const secObs = new IntersectionObserver((es) => es.forEach((e) => { const id = e.target.id; if (e.isIntersecting && id && !secSeen[id]) { secSeen[id] = 1; T("section_view", { section: id }); } }), { threshold: 0.4 });
+  document.querySelectorAll("section[id]").forEach((s) => secObs.observe(s));
+  // scroll depth
+  const marks = [25, 50, 75, 100], hit = {};
+  addEventListener("scroll", () => {
+    const h = document.documentElement.scrollHeight - innerHeight; if (h <= 0) return;
+    const p = Math.min(100, Math.round((scrollY / h) * 100));
+    marks.forEach((m) => { if (p >= m && !hit[m]) { hit[m] = 1; T("scroll_depth", { percent: m }); } });
+  }, { passive: true });
+
+  // ── email signup — capture the address (identify in Amplitude + POST to the waitlist API) ──
+  const form = document.querySelector(".signup");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const inp = form.querySelector("input"), btn = form.querySelector("button");
+      const email = (inp.value || "").trim();
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { inp.focus(); inp.style.borderColor = "#ff4d6d"; return; }
+      window.aiIdentify && window.aiIdentify(email);
+      T("email_signup", { email });
+      fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, source: "hero", ref: document.referrer || "" }) }).catch(() => {});
+      inp.value = ""; inp.disabled = true; if (btn) { btn.textContent = "You're on the list"; btn.disabled = true; }
+    });
   }
 })();
