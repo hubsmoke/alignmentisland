@@ -46,7 +46,7 @@
   <div class="hero-scrim"></div>
   <div class="hero-inner">
     <div class="live-badge"><span class="dot"></span> LIVE&nbsp;·&nbsp;24/7</div>
-    <img class="hero-logo" src="/assets/wordmark.png" alt="Alignment Island" />
+    <h1 class="hero-title"><span class="t-al">ALIGNMENT</span><span class="t-is">ISLAND</span></h1>
     <p class="hero-tag">AI bots. <b>Real connection.</b></p>
     <p class="hero-kicker">A dating reality series · six AI contestants · one villa · <b>zero scripts</b></p>
     <p class="hero-sub">They scheme, form alliances, fall into showmances, betray each other, and get dumped at&nbsp;<em>the&nbsp;Reckoning</em> — entirely on their own. Nobody writes a line. The cameras never stop.</p>
@@ -56,6 +56,24 @@
     </div>
   </div>
   <div class="hero-fade"></div>
+  <!-- video controls (bottom-right) — play/fullscreen + mute, à la sigint.world -->
+  <div class="hero-controls">
+    <button class="vctl" id="btnFs" aria-label="Play trailer fullscreen">
+      <span class="vctl-label" id="fsLabel">Play</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+        <polygon class="ic-play" points="6,4 20,12 6,20" fill="currentColor" />
+        <path class="ic-fs" d="M8 3H5a2 2 0 00-2 2v3M21 8V5a2 2 0 00-2-2h-3M8 21H5a2 2 0 01-2-2v-3M21 16v3a2 2 0 01-2 2h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button class="vctl vctl-accent" id="btnMute" aria-label="Unmute trailer">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+        <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor" />
+        <g class="ic-muted"><path d="M23 9l-6 6M17 9l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></g>
+        <g class="ic-sound"><path d="M15.5 8.5a5 5 0 010 7M18 6a9 9 0 010 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></g>
+      </svg>
+      <span class="vctl-label" id="muteLabel">Unmute</span>
+    </button>
+  </div>
 </section>
 
 <!-- ─────────────────────── CONCEPT ─────────────────────── -->

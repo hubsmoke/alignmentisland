@@ -45,9 +45,10 @@ section{position:relative}
   padding:7px 14px;border-radius:999px;background:rgba(255,59,82,.16);border:1px solid rgba(255,59,82,.5);color:#ff8ea0}
 .live-badge .dot{width:7px;height:7px;border-radius:50%;background:#ff3b52;box-shadow:0 0 12px #ff3b52;animation:blink 1.4s steps(2) infinite}
 @keyframes blink{50%{opacity:.25}}
-.hero-title{font-family:"Anton",sans-serif;font-weight:400;font-size:clamp(58px,13vw,168px);line-height:.88;letter-spacing:1px;margin:22px 0 0;
-  background:linear-gradient(120deg,#fff 10%,var(--pink) 45%,var(--purple) 70%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 60px rgba(255,45,120,.25)}
+.hero-title{font-family:"Anton",sans-serif;font-weight:400;font-size:clamp(56px,12.5vw,162px);line-height:.84;letter-spacing:1px;margin:16px 0 4px}
+.hero-title span{display:block;-webkit-background-clip:text;background-clip:text;color:transparent}
+.t-al{background:linear-gradient(180deg,#ffe0ec 0%,#ff3d86 52%,#d21f63 100%);filter:drop-shadow(0 3px 26px rgba(255,45,120,.5))}
+.t-is{background:linear-gradient(180deg,#dcf8ff 0%,#3fe4ff 52%,#1aa3c6 100%);filter:drop-shadow(0 3px 26px rgba(53,230,255,.5))}
 .hero-tag{font-size:clamp(19px,2.6vw,28px);font-weight:600;margin:22px 0 6px}
 .hero-tag b{color:var(--cyan)}
 .hero-sub{max-width:560px;color:var(--muted);font-size:clamp(15px,1.7vw,18px)}
@@ -147,3 +148,22 @@ section{position:relative}
 .foot-social{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:14px;margin-top:6px;flex-wrap:wrap;justify-content:center}
 .foot-social a{color:var(--cyan);font-weight:600}
 .foot-social a:hover{color:#fff}
+
+/* ── hero video controls (sigint-style) ── */
+.hero-controls{position:absolute;right:clamp(14px,3vw,28px);bottom:clamp(56px,8vh,40px);z-index:20;display:flex;gap:10px}
+.vctl{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;cursor:pointer;
+  font:700 12px/1 "Sora",sans-serif;letter-spacing:2px;text-transform:uppercase;color:#cfc7ea;
+  background:rgba(10,7,19,.62);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);transition:.2s}
+.vctl:hover{background:rgba(10,7,19,.8);border-color:rgba(255,255,255,.4);color:#fff}
+.vctl svg{flex:none}
+.vctl-accent{border-color:rgba(255,45,120,.55);color:#ff9bbb}
+.vctl-accent:hover{border-color:var(--pink);background:rgba(255,45,120,.14);color:#fff;box-shadow:0 0 26px rgba(255,45,120,.35)}
+/* icon state toggles driven by .hero.unmuted / .playing */
+.hero .ic-fs{display:none}.hero.unmuted .ic-play{display:none}.hero.unmuted .ic-fs{display:block}
+.ic-sound{display:none}.hero.unmuted .ic-muted{display:none}.hero.unmuted .ic-sound{display:block}
+/* when unmuted, dim the scrim so the trailer is the star */
+.hero-scrim{transition:opacity .6s}
+.hero.unmuted .hero-scrim{opacity:.35}
+.hero-inner{transition:opacity .6s,transform .6s cubic-bezier(.4,0,.2,1)}
+.hero.unmuted .hero-inner{opacity:0;transform:translateY(14px);pointer-events:none}
+@media(max-width:640px){.vctl-label{display:none}.vctl{padding:12px}}
