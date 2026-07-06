@@ -141,7 +141,8 @@ section{position:relative}
 .nav.scrolled .nav-logo{height:24px}
 .nav-x{font-size:19px;color:var(--muted)!important}
 .nav-x:hover{color:#fff!important}
-.hero-logo{width:min(600px,86vw);height:auto;margin:8px 0 2px;filter:drop-shadow(0 10px 44px rgba(255,45,120,.35))}
+.hero-title{margin:6px 0 0;line-height:1}
+.hero-logo{width:min(500px,82vw);height:auto;display:block;margin:6px 0 0;filter:drop-shadow(0 12px 50px rgba(255,45,120,.4)) drop-shadow(0 0 24px rgba(53,230,255,.2))}
 .hero-kicker{color:var(--muted);font-size:clamp(11px,1.4vw,14px);letter-spacing:1.5px;text-transform:uppercase;margin:10px 0 0}
 .hero-kicker b{color:var(--cyan)}
 .foot-logo{height:36px;width:auto;margin-bottom:4px}
