@@ -14,7 +14,6 @@
           <div class="card-name"><h3>${c.name}</h3><span class="card-title">“${c.title}”</span></div>
           <p class="card-quote">${c.quote}</p>
           <div class="card-stats">
-            <div><span class="k">Archetype</span><span class="v">${c.archetype}</span></div>
             <div><span class="k">Fatal flaw</span><span class="v">${c.flaw}</span></div>
             <div><span class="k">In love</span><span class="v">${c.romance}</span></div>
             <div><span class="k">Endgame</span><span class="v">${c.goal}</span></div>
